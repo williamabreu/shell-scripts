@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ $EUID -ne 0 ]; then
+    echo "Please run as root"
+    exit
+else
+    # Remove forced default rotes
+    ip route del 0.0.0.0/1
+    ip route del 128.0.0.0/1
+
+    # Route intranet through VPN
+    ip route add 10.0.0.0/8 dev tun0
+    ip route add 100.64.0.0/10 dev tun0
+    ip route add 172.16.0.0/12 dev tun0
+
+    # Route AS262488 through VPN - MINASNET
+    ip route add 177.66.48.0/21 dev tun0
+    ip route add 177.66.56.0/21 dev tun0
+    ip route add 177.93.96.0/21 dev tun0
+    ip route add 179.106.160.0/21 dev tun0
+
+    # Route AS53036 through VPN - MINASWORLD
+    ip route add 177.73.192.0/21 dev tun0
+fi

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $EUID -ne 0 ]; then
+    # OpenVPN needs sudo privilegies
+    echo "Please run as root"
+    exit
+elif [ ! -f "/home/$USER/.openvpn/config/$1.ovpn" ]; then
+    echo "<$1.ovpn> file not found"
+    exit
+else
+    # Start the openvpn client
+    openvpn /home/$USER/.openvpn/config/$1.ovpn
+fi
