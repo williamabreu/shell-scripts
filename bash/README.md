@@ -9,3 +9,10 @@
 - **Path:** ```/home/$USER/.bashrc```
 
 -------------------
+
+- **File:** ```inputrc```
+- **Path:** ```/etc/inputrc```
+- **Description:** 
+    - Disable case sensitivity on tab completion
+
+-------------------
